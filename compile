@@ -2,5 +2,5 @@
 mkdir bin;
 sc=$1;
 ds=$2;
-g++ ${sc} -g -o bin/${ds};
+gcc ${sc} -g -o bin/${ds};
 rm -rf bin/*.dSYM;
