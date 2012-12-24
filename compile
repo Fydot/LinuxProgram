@@ -1,0 +1,7 @@
+#!/bin/sh
+mkdir bin;
+sc=$1;
+ds=$2;
+g++ ${sc} -g -o bin/${ds};
+mkdir dSYM;
+mv bin/*.dSYM dSYM/;
