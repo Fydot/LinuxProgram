@@ -19,7 +19,9 @@ int sub(int a, int b)
         return a - b;
 }
 
-F funcs[] = {add, sub};
+F funcs[2][2] = {{add, sub}, {add, sub}};
+F (*pf)[2][2] = &funcs;
+
 enum FS {F_ADD, F_SUB};
 
 int main(void)
@@ -30,7 +32,8 @@ int main(void)
 
         printf("%c %c %c\n", *((*(pa+5)) + 1), *((*((*(ppa+1))+2))+1), *(*(*(*(pppa) + 2) + 2) + 1));
 
-        printf("%d %d\n", (funcs[F_ADD])(1, 2), (funcs[F_SUB])(2, 1));
+        // printf("%d %d\n", (funcs[F_ADD])(1, 2), (funcs[F_SUB])(2, 1));
+        printf("%d\n", ((*(*(pf) + 1)))[0](1, 2));
 
         return 0;
 }
