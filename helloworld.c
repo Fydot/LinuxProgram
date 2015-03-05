@@ -93,14 +93,17 @@ void print(struct rational a)
 
 int main(void)
 {
-        int a, b, c, d;
-        while (~scanf("%d %d %d %d", &a, &b, &c, &d)) {
-                struct rational left = make(a, b);
-                struct rational right = make(c, d);
-                print(add(left, right));
-                print(sub(left, right));
-                print(mul(left, right));
-                print(div(left, right));
-        }
+        /* int a, b, c, d;
+         * while (~scanf("%d %d %d %d", &a, &b, &c, &d)) {
+         *         struct rational left = make(a, b);
+         *         struct rational right = make(c, d);
+         *         print(add(left, right));
+         *         print(sub(left, right));
+         *         print(mul(left, right));
+         *         print(div(left, right));
+         * }
+         */
+        char a = getchar();
+        printf("%c\n", a);
         return 0;
 }
