@@ -29,5 +29,26 @@ int main()
 
     close(fd);
 
+    fd = open("data.txt", O_RDONLY);
+
+    char me[40], wife[40], bro[40];
+    vecs[0].iov_base = me;
+    vecs[0].iov_len = strlen(me);
+    vecs[1].iov_base = wife;
+    vecs[1].iov_len = strlen(wife);
+    vecs[2].iov_base = bro;
+    vecs[2].iov_len = strlen(bro);
+
+    if(readv(fd, vecs, BUFLEN) == -1) {
+        perror("readv");
+        return 1;
+    }
+
+    for (i = 0; i < BUFLEN; i++) {
+        printf("%s\n", (char *)vecs[i].iov_base);
+    }
+
+    close(fd);
+
     return 0;
 }
