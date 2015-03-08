@@ -3,7 +3,7 @@
 int main()
 {
     char* names = "hhhhhhhh";
-    FILE *in, *out;
+    FILE *out;
     int i;
 
     out = fopen("data", "w");
@@ -24,4 +24,5 @@ int main()
             return 1;
         }
     }
+    fclose(out);
 }
