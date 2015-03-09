@@ -37,5 +37,6 @@ int main()
         printf("event=%ld on fd=%d\n", events[i].events, events[i].data.fd);
     }
 
+    free(events);
     return 0;
 }
