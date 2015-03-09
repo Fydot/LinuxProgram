@@ -1,4 +1,5 @@
 #include <sys/epoll.h>
+#include <stdlib.h>
 
 #define MAX_EVENTS 64
 
