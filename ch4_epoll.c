@@ -1,6 +1,6 @@
-#include <sys/epoll.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/epoll.h>
 
 #define MAX_EVENTS 64
 
@@ -34,7 +34,7 @@ int main()
 
     nr_events = epoll_wait(epfd, events, MAX_EVENTS, -1);
     for (i = 0; i < nr_events; i++) {
-        printf("event=%ld on fd=%d\n", events[i].events, events[i].data.fd);
+        printf("%ld event=%ld on fd=%d\n", EPOLLIN, events[i].events, events[i].data.fd);
     }
 
     free(events);
