@@ -6,7 +6,8 @@
 int main()
 {
     int fd, epfd, ret, nr_events, i;
-    struct epoll_event event, *events;
+    struct epoll_event event;
+    struct epoll_event *events;
 
     // 创建 epoll fd
     if ((epfd = epoll_create1(0))== -1) {
@@ -17,7 +18,7 @@ int main()
     // 注册标准输入 fd=0
     event.data.fd = 0;
     event.events = EPOLLIN | EPOLLOUT;
-    if ((ret = epoll_ctl(epfd, EPOLL_CTL_ADD, 0, event)) == -1) {
+    if ((ret = epoll_ctl(epfd, EPOLL_CTL_ADD, 0, &event)) == -1) {
         perror("epoll_ctl");
         return 1;
     }
@@ -33,6 +34,6 @@ int main()
     for (i = 0; i < nr_events; i++) {
         printf("event=%ld on fd=%d\n", events[i].events, events[i].data.fd);
     }
-    
+
     return 0;
 }
