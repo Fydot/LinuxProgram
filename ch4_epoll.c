@@ -3,13 +3,15 @@
 #include <sys/epoll.h>
 
 #define MAX_EVENTS 64
+#define MAX_BUFSIZ 1024
 
 
 int main()
 {
-    int fd, epfd, ret, nr_events, i;
+    int fd, epfd, ret, nr_events, i, len;
     struct epoll_event event;
-    struct epoll_event *events;
+    struct epoll_event events[MAX_EVENTS];
+    char buf[MAX_BUFSIZ];
 
     // 创建 epoll fd
     if ((epfd = epoll_create1(0))== -1) {
@@ -26,17 +28,16 @@ int main()
     }
 
     // 等待 epoll 事件
-    events = malloc(sizeof(struct epoll_event) * MAX_EVENTS);
-    if (!events) {
-        perror("malloc");
-        return 1;
+    while(1) {
+        nr_events = epoll_wait(epfd, events, MAX_EVENTS, -1);
+        for (i = 0; i < nr_events; i++) {
+            if (events[i].events == EPOLLIN) {
+                len = read(events[i].data.fd, buf, MAX_BUFSIZ);
+                buf[len] = "\0";
+                printf("%s\n", buf);
+            }
+        }
     }
-
-    nr_events = epoll_wait(epfd, events, MAX_EVENTS, -1);
-    for (i = 0; i < nr_events; i++) {
-        printf("%ld event=%ld on fd=%d\n", EPOLLIN, events[i].events, events[i].data.fd);
-    }
-
-    free(events);
+    
     return 0;
 }
