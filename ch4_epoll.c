@@ -21,7 +21,7 @@ int main()
 
     // 注册标准输入 fd=0
     event.data.fd = 0;
-    event.events = EPOLLIN | EPOLLOUT;
+    event.events = EPOLLIN;
     if ((ret = epoll_ctl(epfd, EPOLL_CTL_ADD, 0, &event)) == -1) {
         perror("epoll_ctl");
         return 1;
@@ -33,8 +33,8 @@ int main()
         for (i = 0; i < nr_events; i++) {
             if (events[i].events == EPOLLIN) {
                 len = read(events[i].data.fd, buf, MAX_BUFSIZ);
-                buf[len] = '\0';
-                printf("%s\n", buf);
+                //buf[len] = '\0';
+                printf("buf = \"%s\"", buf);
             }
         }
     }
