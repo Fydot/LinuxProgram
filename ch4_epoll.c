@@ -34,7 +34,7 @@ int main()
             if (events[i].events == EPOLLIN) {
                 len = read(events[i].data.fd, buf, MAX_BUFSIZ);
                 buf[len] = '\0';
-                printf("buf = \"%s\"", buf);
+                printf("buf = \"%s\"\n", buf);
             }
         }
     }
