@@ -8,7 +8,7 @@
 
 int main()
 {
-    int fd, epfd, ret, nr_events, i, len;
+    int epfd, ret, nr_events, i, len;
     struct epoll_event event;
     struct epoll_event events[MAX_EVENTS];
     char buf[MAX_BUFSIZ];
