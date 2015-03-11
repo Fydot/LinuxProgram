@@ -25,11 +25,12 @@ int main(int argc, char* argv[])
         return 1;
     }
  
-    memset(ptr, 'h', sta.st_size);
+    //memset(ptr, 'h', sta.st_size);
 
     for (index = 0; index < sta.st_size; index ++) {
         printf("%c", *(ptr+index));
     }
+    printf("\n");
 
     if (close(fd) == -1) {
         perror("close");
